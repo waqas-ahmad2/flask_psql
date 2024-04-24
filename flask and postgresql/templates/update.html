@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class=" row justify-content-center ">
+    <div class="col-md-6">
+        <div class="card border-dark">
+            <div class="card-header">
+                Update Course Record
+            </div>
+
+            <div class="card card-body">
+                <form class="form-group" action="/update/{{data[0]}}" method="Post">
+                    <div class="form-group">
+                        <label for="uc_name">Course Name</label>
+                        <input name="u_course_name" id="uc_name" value="{{data[1]}}" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="uc_fees">Fees</label>
+                        <input name="u_fees" id="uc_fees" value="{{data[2]}}" type="number" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="uc_duration">Duration</label>
+                        <input name="u_duration" id="uc_duration" value="{{data[3]}}" type="number" class="form-control">
+                    </div>
+                    <div class="form-group text-center">
+                        <button class="btn btn-warning btn-block">Update</button>
+                        <a href="/" class="btn btn-primary btn-block">Back</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

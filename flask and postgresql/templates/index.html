@@ -1,0 +1,77 @@
+{% extends "layout.html"%}
+{%block body%}
+<div class="row">
+    <h3>Students</h3>
+</div>
+    <div class="row">
+        <div class="col-md-4">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+                {%if message == 'Course Deleted Successfully'%}
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    {{message}}
+                    <button class="close" type="button" data-dismiss="alert" aria-label="Close"><span>x</span></button>
+                </div>
+                {%else%}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">x</span> </button>
+                </div>
+                {%endif%}
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <div class="card card-body border-dark">
+                <form action="/create" method="post">
+                    <div class="form-group">
+                        <label for="c_name">Course Name</label>
+                        <input name="course_name" id="c_name" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="c_fees">Fees</label>
+                        <input name="fees" id="c_fees" type="number" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="c_duration">Duration</label>
+                        <input name="duration" id="c_duration" type="number" class="form-control">
+                    </div>
+                    <button class="btn btn-primary btn-block">Save</button>
+
+                </form>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <table id="example" class= "table table-hover table-bordered">
+
+                <thead>
+                    <tr class="bg-dark text-white">
+                        <th scope="col">S.No.</th>
+                        <th scope="col">Course Name</th>
+                        <th scope="col">Fees</th>
+                        <th scope="col">Duration</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for i in data%}
+                    <tr>
+                        <!-- data.index is used so that table has S.no. even when some
+                        id get deleted from the table-->
+                        <td scope="row">{{data.index(i)+1}}</td>
+                        <td>{{i[1]}}</td>
+                        <td>{{i[2]}}</td>
+                        <td>{{i[3]}}</td>
+                        <td width="150" >
+                            <!-- to get the value for button we need real ID not index -->
+                            <a href="/update/{{i[0]}}" class="btn btn-warning btn-sm">Update</a>
+                            <a href="/delete/{{i[0]}}" class="btn btn-danger btn-sm ">Delete</a>
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{%endblock%}
